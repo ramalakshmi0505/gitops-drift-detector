@@ -1,4 +1,4 @@
-# 🔍 gitops-drift-detector
+# Gitops-drift-detector
 
 Scan your ArgoCD applications for config drift and get alerts via Slack and email, from the CLI or as a scheduled CI pipeline.
 
