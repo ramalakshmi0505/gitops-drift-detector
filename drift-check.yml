@@ -1,0 +1,40 @@
+name: GitOps Drift Detection
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:          # manual trigger
+
+jobs:
+  drift-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run drift scan
+        env:
+          ARGOCD_URL:      ${{ secrets.ARGOCD_URL }}
+          ARGOCD_TOKEN:    ${{ secrets.ARGOCD_TOKEN }}
+          SLACK_WEBHOOK:   ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          python main.py \
+            --url "$ARGOCD_URL" \
+            --token "$ARGOCD_TOKEN" \
+            --slack-webhook "$SLACK_WEBHOOK" \
+            --output both \
+            --fail-on-drift
+
+      - name: Upload drift report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift-report
+          path: reports/
