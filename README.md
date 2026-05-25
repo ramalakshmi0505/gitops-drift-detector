@@ -1,8 +1,8 @@
 # 🔍 gitops-drift-detector
 
-> Scan your ArgoCD applications for config drift and deliver alerts to Slack and email — from the CLI or as a scheduled CI pipeline.
+Scan your ArgoCD applications for config drift and get alerts via Slack and email, from the CLI or as a scheduled CI pipeline.
 
-Built from real-world experience operating GitOps platforms across 10+ business units at DXC Technology.
+Built from real production experience operating GitOps platforms across 10+ business units at DXC Technology.
 
 ---
 
@@ -11,9 +11,9 @@ Built from real-world experience operating GitOps platforms across 10+ business 
 - Connects to any ArgoCD instance using username/password or a bearer token
 - Scans every application for sync and health status
 - Detects drift: OutOfSync, Degraded, Missing, or Unknown applications
-- Sends colour-coded alerts to **Slack** and/or **email**
-- Outputs a **terminal report** and a **JSON file** for downstream processing
-- Supports **CI/CD mode** — exits with code 1 if drift is found, blocking pipelines
+- Sends alerts to Slack and email
+- Outputs a terminal report and a JSON file
+- CI/CD mode: exits with code 1 if drift is found, blocking pipelines
 
 ---
 
@@ -80,7 +80,7 @@ python main.py --url https://argocd.example.com --token <token> \
 python main.py --url https://argocd.example.com --token <token> --output json
 ```
 
-### CI mode — fail pipeline on drift
+### CI mode: fail pipeline on drift
 ```bash
 python main.py --url https://argocd.example.com --token <token> --fail-on-drift
 ```
@@ -110,9 +110,9 @@ python main.py --url https://argocd.example.com --token <token> --fail-on-drift
 
 ---
 
-## GitHub Actions — scheduled drift scanning
+## GitHub Actions: scheduled drift scanning
 
-Add to your repo and configure these secrets: `ARGOCD_URL`, `ARGOCD_TOKEN`, `SLACK_WEBHOOK`.
+Add to your repo and set these secrets: `ARGOCD_URL`, `ARGOCD_TOKEN`, `SLACK_WEBHOOK`.
 
 The included workflow (`.github/workflows/drift-check.yml`) runs every 6 hours and uploads drift reports as artifacts.
 
@@ -140,9 +140,9 @@ The included workflow (`.github/workflows/drift-check.yml`) runs every 6 hours a
 
 ---
 
-## Real-world context
+## Background
 
-At DXC Technology, this type of drift detection was part of the observability platform built for Platform X, which served 10+ business units running production workloads on EKS. Catching drift early — before it causes an incident — was the difference between a 5-minute fix and a 3am page.
+At DXC Technology, drift detection was part of the observability platform I built for Platform X, serving 10+ business units on EKS. Catching drift early before it turns into an incident is the difference between a 5-minute fix and a 3am page.
 
 ---
 
