@@ -2,21 +2,6 @@
 
 Scan your ArgoCD applications for config drift and get alerts via Slack and email, from the CLI or as a scheduled CI pipeline.
 
-Built from real production experience operating GitOps platforms across 10+ business units at DXC Technology.
-
----
-
-## What it does
-
-- Connects to any ArgoCD instance using username/password or a bearer token
-- Scans every application for sync and health status
-- Detects drift: OutOfSync, Degraded, Missing, or Unknown applications
-- Sends alerts to Slack and email
-- Outputs a terminal report and a JSON file
-- CI/CD mode: exits with code 1 if drift is found, blocking pipelines
-
----
-
 ## Sample terminal output
 
 ```
@@ -42,6 +27,15 @@ Built from real production experience operating GitOps platforms across 10+ busi
   Repo    : https://github.com/org/platform@main
   ⚠  app is out of sync with Git source
 ```
+
+## What it does
+
+- Connects to any ArgoCD instance using username/password or a bearer token
+- Scans every application for sync and health status
+- Detects drift: OutOfSync, Degraded, Missing, or Unknown applications
+- Sends alerts to Slack and email
+- Outputs a terminal report and a JSON file
+- CI/CD mode: exits with code 1 if drift is found, blocking pipelines
 
 ---
 
